@@ -1,0 +1,11 @@
+<nav class="navbar navbar-expand-lg navbar-transparent  navbar-absolute fixed-top">
+    <div class="container-fluid">
+        <div class="collapse navbar-collapse justify-content-end" id="navigation">
+                        <a>Tcode : {{tcode}} </a>
+                        <a style="margin:10px">Username : {{user}}</a>
+                        <button mat-raised-button (click)="logout()" *ngIf=user color="warn">
+                            Logout
+                        </button>
+        </div>
+    </div>
+</nav>

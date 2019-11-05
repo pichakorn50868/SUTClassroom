@@ -1,0 +1,37 @@
+<mat-card style="margin-left:25%;padding-left:40px;padding-right:40px;margin-top:15%">
+  <mat-card-content>
+    <form [formGroup]= "form" (ngSubmit)="onSubmit()">
+        
+      <div style="position:absolute;top:-50px;left:40%"> 
+        Databse {{database}}
+          <i *ngIf="offline" class="material-icons" style="position:absolute;color:red;top:-2px;left:100%">lens</i>
+          <i  *ngIf="online" class="material-icons" style="position:absolute;color:green;top:-2px;left:100%">lens</i> 
+          <i *ngIf="suspect" class="material-icons" style="position:absolute;color:orange;top:-2px;left:100%">lens</i>  
+      </div>
+
+      <a class="font1">Please login to continue</a>
+      <mat-form-field class="full-width-input">
+        <input matInput placeholder="Username" formControlName="userName" required autocomplete="off">
+
+      </mat-form-field>
+      <mat-form-field class="full-width-input">
+        <input matInput type="password" placeholder="Password" formControlName="password" required autocomplete="off">
+
+      </mat-form-field>
+      <!-- -->
+      <button mat-raised-button color="primary">Login</button>
+
+    </form>
+    <br>
+
+<!--      matTooltip="Bug" matTooltipPosition="right"   แปะข้อความ  -->
+
+    <p style="font-size:17px" >
+      ถ้าคุณยังไม่มี Account : &nbsp;
+      <button stype="align:center" mat-stroked-button color="primary" (click)="register()"><b>Register</b></button>
+      
+    </p>
+    
+    <br>
+  </mat-card-content>
+</mat-card>

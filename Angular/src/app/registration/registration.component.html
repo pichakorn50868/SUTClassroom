@@ -1,0 +1,40 @@
+<mat-card style="padding-left:40px;padding-right:40px;padding-bottom:50px;padding-top:40px;margin-top:110px;left:-20px">
+    <div style="text-align: center;padding-bottom:20px;width:35%;height:35%">
+          <img style="position: relative;left:95%" src='assets/img/logo.png' width="100%" height="100%"/>
+    </div>
+    <mat-card-content>
+        <mat-grid-list cols="6" rowHeight="50px">
+          
+            <mat-grid-tile [colspan]="2">
+                รหัสประจำตัว : 
+            </mat-grid-tile>
+            <mat-grid-tile [colspan]="4">
+                <input class="full-width-input" placeholder="" required autocomplete="off" #tcode>
+            </mat-grid-tile>
+            <mat-grid-tile [colspan]="2">
+                Username : 
+            </mat-grid-tile>
+            <mat-grid-tile  [colspan]="4">
+                <input class="full-width-input" placeholder=""  required autocomplete="off" #username>
+            </mat-grid-tile>
+            <mat-grid-tile [colspan]="2">
+                Password : 
+            </mat-grid-tile>
+            <mat-grid-tile  [colspan]="4">
+                <input class="full-width-input"  type="password" placeholder="" required autocomplete="off" #password>
+            </mat-grid-tile>
+            <mat-grid-tile [colspan]="2">
+                E-mail :
+            </mat-grid-tile>
+            <mat-grid-tile [colspan]="4">
+                <input class="full-width-input" placeholder="" required autocomplete="off" #email>   
+            </mat-grid-tile>
+      
+          </mat-grid-list>
+      <br>
+      <p style="position: absolute;right: 170px">ถ้ามี Account อยู่แล้ว : </p> <button mat-raised-button color="" style="position: absolute;right: 90px;" (click)="login()">Login</button>       
+      <button mat-raised-button color="primary" style="position: absolute;right: -20px;" (click)="register(tcode.value,username.value,password.value,email.value)">Register</button>
+  <!--      matTooltip="Bug" matTooltipPosition="right"   แปะข้อความ  -->
+    </mat-card-content>
+  </mat-card>
+  

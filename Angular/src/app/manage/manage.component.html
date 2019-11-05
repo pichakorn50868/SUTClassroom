@@ -1,0 +1,344 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                      รายวิชา
+                      <button mat-icon-button style="position:absolute;right:10px;top:6px" data-toggle="modal" data-target="#exampleModal"><!--color="warn"-->
+                        <mat-icon aria-label="add">add</mat-icon>    
+                      </button>
+                             
+                        <div *ngIf="!subjects" >
+                            <mat-progress-bar mode="buffer" color="warn" style="position:absolute;bottom:0px;left:0px"></mat-progress-bar>
+                        </div>
+                    </div>
+                        <div class="card" *ngFor="let subject of subjects; let i = index" style="padding:10px;margin-left:-10px;background-color:	rgb(200,200,200);color:rgb(50,50,50)">
+                            <a class="card-link" data-toggle="collapse" href="#{{subject.subjectName}}">
+                                <div class="card-header">
+                                        <a style="font-size:20px;margin-left:40px;color:black">{{subject.subjectId}}  {{subject.subjectName}}</a>
+                                        <div style="position:absolute;right:1%;top:12px">
+                                                <button mat-button style="" data-toggle="collapse">
+                                                    <mat-icon style="font-size:30px;color:black">
+                                                    keyboard_arrow_down
+                                                    </mat-icon>
+                                                </button>     
+                                            <button mat-button style="">
+                                                <mat-icon style="font-size:30px;color:black">
+                                                        library_add
+                                                </mat-icon>
+                                            </button>
+                                            <button mat-button style="">
+                                                <mat-icon style="font-size:30px;color:black">
+                                                    build
+                                                </mat-icon>
+                                            </button>     
+                                            <a>
+                                            <button mat-button style="color:black" (click)="delete(subject.subjectCode)">
+                                                <mat-icon style="font-size:30px">delete</mat-icon>
+                                            </button>
+                                            </a>
+                                            
+                                        </div>
+                                    </div>
+                            </a>                           
+
+                            <div id="{{subject.subjectName}}" class="collapse">
+                              <div class="card-body" style="font-size:16px;color:rgb(0, 0, 0);text-shadow:1px 1px 1px rgb(146, 146, 146)">
+                                  วันที่อัพเดรท (รายชื่อนักศึกษา) : {{subject.dateStudent}}
+                                  <br>
+                                  วันที่อัพเดรทคะแนน : {{subject.dateScore}}
+                                  <br>
+                                  จำนวนนักศึกษา : {{subject.stdno}}
+                                  <br> 
+                                  Mode Grade : {{subject.modeGrade}}
+                              </div>
+                            </div>             
+                      
+                        </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Button trigger modal -->
+   
+   <!-- Modal -->
+   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document"  style="position:absolute;left:10%">
+        <div class="modal-content" style="width:700px">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">เพิ่มรายวิชา {{sjname}}</h5>
+            <a style="position:absolute;right:50px">จำนวนนักศึกษา : {{numstudent}}</a>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+              <mat-grid-list cols="18" rowHeight="50px">
+                  <mat-grid-tile [colspan]="2">
+                      <a style="margin-left:15px">รหัสวิชา </a> 
+                  </mat-grid-tile>
+                  <mat-grid-tile [colspan]="2">
+                      <input style="position:absolute;width:100%;right:0px" [(ngModel)]="sjcode">
+                  </mat-grid-tile>
+                  <mat-grid-tile [colspan]="2">
+                          <a style="margin-left:15px">ชื่อวิชา </a> 
+                  </mat-grid-tile>
+                  <mat-grid-tile [colspan]="8">
+                      <input style="width:100%" [(ngModel)]="sjname">
+                  </mat-grid-tile>
+                  <mat-grid-tile [colspan]="4">
+                      <!-- <input style="width:80%" placeholder="ปีการศึกษา" #sjyear> -->
+                      ปีการศึกษา : 
+                      <mat-form-field style="width:50px;margin-left:5px">
+                              <select matNativeControl #sjyear required>
+                                      <option value="58">58</option>
+                                      <option value="59">59</option>
+                                      <option value="60">60</option>
+                                      <option value="61">61</option>
+                                      <option value="62">62</option>
+                                      <option value="63">63</option>
+                              </select>
+                      </mat-form-field>
+                  </mat-grid-tile>
+                  
+                  <mat-grid-tile [colspan]="14">
+                  </mat-grid-tile>
+       
+                  <mat-grid-tile [colspan]="4">
+                          เทอมที่ : 
+                          <mat-form-field style="width:50px;margin-left:5px">
+                                  <select matNativeControl #sjterm required>
+                                          <option value="1">1</option>
+                                          <option value="2">2</option>
+                                          <option value="3">3</option>
+                                  </select>
+                          </mat-form-field>
+                          <!-- <input style="position:absolute;width:80%;left:0px" placeholder="เทอมที่" #sjterm> -->
+                  </mat-grid-tile>
+              </mat-grid-list>
+  
+              <mat-grid-list cols="3" rowHeight="50px">
+                  <mat-grid-tile [rowspan]="7" [colspan]="1">
+                    <mat-grid-list cols="3" rowHeight="40px" style="width:200px">
+                        <mat-grid-tile [colspan]="3">
+                                  <a style="right:0px">
+                                          Mode Grade : 
+                                  </a>
+                                  
+                                  <mat-form-field style="width:60px;margin-left:5px">
+                                          <select matNativeControl (click)=handleSelectChange(range.value) #range [(ngModel)]="modegradeselected" required>
+                                                  <option value="A-F">A-F</option>
+                                                  <option value="S-F">S-F</option>
+                                          </select>
+                                  </mat-form-field>
+                        </mat-grid-tile>
+                        <div *ngIf=rangedaf>
+                            <mat-grid-tile>
+                                A
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <input style="width:60px;padding-left:30%" type="text" (change)="OnChange(ac.value,'a')" #ac [(ngModel)]="grade.a">
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                - {{a}}
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                B+
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <input style="width:60px;padding-left:30%" type="text" (change)="OnChange(bplusc.value,'bplus')" #bplusc  [(ngModel)]="grade.bplus">  
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                - {{bplus}}   
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                B
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <input style="width:60px;padding-left:30%" type="text" (change)="OnChange(bc.value,'b')" #bc  [(ngModel)]="grade.b">
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                - {{b}}
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                C+
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <input style="width:60px;padding-left:30%" type="text" (change)="OnChange(cplusc.value,'cplus')" #cplusc  [(ngModel)]="grade.cplus">
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                - {{cplus}}
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                C
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <input style="width:60px;padding-left:30%" type="text" (change)="OnChange(cc.value,'c')" #cc  [(ngModel)]="grade.c">
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                - {{c}}
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                D+
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <input style="width:60px;padding-left:30%" type="text" (change)="OnChange(dplusc.value,'dplus')" #dplusc  [(ngModel)]="grade.dplus">
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                - {{dplus}}
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                D
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <input style="width:60px;padding-left:30%" type="text" (change)="OnChange(dc.value,'d')" #dc  [(ngModel)]="grade.d">
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                - {{d}}
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                F
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                0  
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                - {{f}}
+                            </mat-grid-tile>
+                          </div>
+                          <div *ngIf=rangedsf>
+                            <mat-grid-tile>
+                                S
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <input style="width:60px;padding-left:30%" type="text" (change)="OnChange(sc.value,'s')" #sc  [(ngModel)]="grade.s">
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                - {{s}}
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                F
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                0
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                - {{fs}}
+                            </mat-grid-tile>
+                            <mat-grid-tile [rowspan]="6">
+                            </mat-grid-tile>
+                          </div>
+                      </mat-grid-list>
+                  </mat-grid-tile>
+  
+                  <mat-grid-tile [colspan]="2">
+                      <br>
+                          <form [formGroup]="addCourseForm">
+                                  <input style="width:40%" type="text" formControlName="eventInput" placeholder="เพิ่มรายการเก็บคะแนน" [(ngModel)]="type.name" > 
+                  
+                              <input style="width:20%;margin-right:10px" formControlName="eventScore" type="text" placeholder="เก็บกี่ %" [(ngModel)]="type.score"> 
+                              
+                              <button mat-raised-button (click)="onClickUserInsertEvent()" color="primary" >
+                                  เพิ่ม 
+                              </button> 
+                          </form> 
+                       <br>       
+                  </mat-grid-tile>
+                  <mat-grid-tile [rowspan]="6" [colspan]="2">
+                          <a style="position:absolute;left:50px;top:7px">
+                                  รายการเก็บคะแนน
+                          </a>
+                          <mat-grid-list cols="2" rowHeight="40px" style="width:200px;position:absolute;top:0px;left:200px">
+                              
+                              <div *ngFor="let e of eventList" (click)="onClickDisableEvent(e)">
+                                      <mat-grid-tile>
+                                          <a style="position:absolute;right:0px">
+                                              {{e.name}} :
+                                          </a>
+                                      </mat-grid-tile>
+                                      <mat-grid-tile>
+                                          <a style="margin-left:0px">
+                                              {{e.score}} % 
+                                          </a>                                
+                                      </mat-grid-tile>
+                                  </div>
+                                      <mat-grid-tile>
+                                          <a style="position:absolute;right:0px;color:red" *ngIf="sum!=100">
+                                          Total :   
+                                          </a>  
+                                          <a style="position:absolute;right:0px" *ngIf="sum==100">
+                                          Total :   
+                                          </a>  
+                                      </mat-grid-tile>
+                                      <mat-grid-tile>
+                                          <a style="margin-left:0px;color:red" *ngIf="sum!=100">
+                                          {{sum}} %  
+                                          </a>  
+                                          <a style="margin-left:0px" *ngIf="sum==100">
+                                          {{sum}} % 
+                                          </a>                               
+                                      </mat-grid-tile>
+                          </mat-grid-list>
+                          
+                  
+                  </mat-grid-tile>
+              </mat-grid-list>
+          <br>
+          <div class="modal-footer">
+              <mat-progress-bar style="position: absolute;top:0px;left:1px" mode="determinate" value={{process}}></mat-progress-bar>
+              <div>
+              <a *ngIf="!csvupload" style="position:relative;left:-50px;color: red" >*กรุณา Upload CSV </a>
+              <a *ngIf="csvupload" style="position:relative;left:-50px" >Upload CSV </a>
+  
+              <a style="position:relative;left:-50px"><input type="file" style="margin-left:10px" (change)="onFileSelect($event.target.files)">
+                  <a style="position:relative;left:-90px">{{process | number : '0.0-0'}}%</a></a> &nbsp;&nbsp;
+              <!--
+              <button type="submit" class="btn btn-danger text-white" (click)="onUploadcsv()">
+                <i class="fa fa-upload"></i> Upload
+              </button>
+          -->
+            <button type="button" class="btn btn-success" (click)="addsubject(sjyear.value,sjterm.value,range.value)" data-dismiss="modal" aria-label="Close" [disabled]="!havecsv">เพิ่มรายวิชา</button>
+            </div>
+          </div>
+  
+          <!-- Import -->
+          <div class="modal fade" id="importModal" tabindex="-1" role="dialog" aria-labelledby="importModalLabel" aria-hidden="true">
+             <div class="modal-dialog" role="document"  style="position:absolute;left:30%">
+               <div class="modal-content" style="width:700px">
+                          <div class="modal-header">
+                                  <h5 class="modal-title" id="importModalLabel">เพิ่มรายวิชา</h5>
+                          </div>
+                  <!--div class="card-header bg-danger">
+                    <p class="modal-title" style="font-size:18px; display:inline">
+                      <i class="fa fa-address-card" aria-hidden="true"></i>&nbsp;&nbsp;เพิ่มรายชื่อนักศึกษาโดยการอัพโหลดไฟล์ .csv</p>
+                    <p class="text-light" style="font-size:14px">
+                      <i class="fa fa-warning text-warning" aria-hidden="true"></i> รองรับเฉพาะไฟล์ UTF-8</p>
+                  </div-->
+                  <div class="modal-body text-center">
+                    <p class="text-danger text-left" style="font-size:14px">
+                      <i class="fa fa-warning text-warning" aria-hidden="true"></i> รองรับเฉพาะไฟล์ UTF-8</p>
+                    <input type="file" (change)="onFileSelect($event.target.files)"> &nbsp;&nbsp;
+                    <button type="submit" class="btn btn-danger text-white" (click)="onUploadcsv()">
+                      <i class="fa fa-upload"></i> Upload
+                    </button>
+                  </div>
+                  <div class="card-footer text-muted">
+                      <div class="row">
+                              <div class="col text-left text-danger">
+                              <a href="https://firebasestorage.googleapis.com/v0/b/sut-classroom.appspot.com/o/%E0%B8%84%E0%B8%B9%E0%B9%88%E0%B8%A1%E0%B8%B7%E0%B8%AD%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B9%80%E0%B8%95%E0%B8%A3%E0%B8%B5%E0%B8%A2%E0%B8%A1%E0%B9%84%E0%B8%9F%E0%B8%A5%E0%B9%8C.pdf?alt=media&token=d60f25e4-e678-460b-af2d-97065d9ed2a1">
+                                  <button type="button" class="btn btn-outline-danger btn-sm">คู่มือเตรียมไฟล์ csv.pdf</button></a>
+                              </div>
+                              <div class="col text-right">
+                              <!--button type="button" class="btn btn-danger text-right" (click)="c('Close click')">ตกลง</button-->
+                              </div>
+                      </div>
+                  </div>
+  
+                  </div>
+                </div>
+              </div>
+                <!-- End -->
+        </div>
+      </div>
+    </div>
