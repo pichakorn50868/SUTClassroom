@@ -1,0 +1,38 @@
+<div class="logo">
+    <a href="" class="simple-text">
+        <div class="logo-img">
+            <img src="/assets/img/sut_herder.png"/>
+        </div>
+        <a style="margin-left:20px">SUT Classroom</a>
+    </a>
+</div>
+<div class="sidebar-wrapper" *ngIf=user>
+  <div *ngIf="isMobileMenu()">
+   
+   
+  </div>
+    <ul class="nav">
+        <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
+            <a class="nav-link" [routerLink]="[menuItem.path]">
+                <i class="material-icons">{{menuItem.icon}}</i>
+                <p>{{menuItem.title}}</p>
+            </a>
+        </li>
+        <li routerLinkActive="active" *ngFor="let subject of subjects" class="{{subject.class}} nav-item" >
+            <a class="nav-link" [routerLink]="['/subject', subject.subjectCode, 'score','Attendence']">
+                <p>{{subject.subjectId}}</p>
+            </a>
+        </li>
+        <li class="active-pro nav-item">       
+                <p style="margin-left:20px" class="nav-link">
+                    Databse {{database}}     
+                    
+                <i *ngIf="offline" class="material-icons" style="color:red">lens</i>
+                <i *ngIf="online" class="material-icons" style="color:green">lens</i> 
+                <i *ngIf="suspect" class="material-icons" style="color:orange">lens</i>   
+
+                </p>
+        </li>
+        
+    </ul>
+</div>
