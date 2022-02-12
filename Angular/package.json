@@ -33,7 +33,7 @@
     "@angular/router": "7.2.14",
     "@ng-bootstrap/ng-bootstrap": "^4.1.3",
     "@zxing/ngx-scanner": "^1.7.1",
-    "ajv": "6.4.0",
+    "ajv": "6.12.3",
     "angular2-qrscanner": "^1.0.7",
     "angularx-qrcode": "^1.5.3",
     "arrive": "2.4.1",
